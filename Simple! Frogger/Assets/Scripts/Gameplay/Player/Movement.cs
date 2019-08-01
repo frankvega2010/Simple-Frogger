@@ -6,10 +6,22 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public int speed;
+    public bool canMove;
+    public LevelMove levelMove;
+
+    private void Start()
+    {
+        levelMove.OnLevelMove += SwitchMovement;
+    }
 
     // Update is called once per frame
     private void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         float XAxis = Input.GetAxisRaw("Horizontal");
         float YAxis = Input.GetAxisRaw("Vertical");
 
@@ -35,5 +47,15 @@ public class Movement : MonoBehaviour
         {
             transform.position = transform.position - new Vector3(0, speed, 0) * Time.deltaTime;
         }
+    }
+
+    private void SwitchMovement()
+    {
+        canMove = !canMove;
+    }
+
+    private void OnDestroy()
+    {
+        levelMove.OnLevelMove -= SwitchMovement;
     }
 }
