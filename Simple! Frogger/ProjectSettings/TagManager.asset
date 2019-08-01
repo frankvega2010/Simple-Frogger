@@ -8,6 +8,7 @@ TagManager:
   - water
   - nextLevel
   - log
+  - points
   layers:
   - Default
   - TransparentFX

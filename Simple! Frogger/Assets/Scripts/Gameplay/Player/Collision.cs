@@ -8,8 +8,15 @@ public class Collision : MonoBehaviour
     public OnPlayerAction OnPlayerDeath;
     public GameObject water;
 
+    private PlayerStatus player;
     private string nextCollider;
     private bool firstCollision;
+
+
+    private void Start()
+    {
+        player = GetComponent<PlayerStatus>();
+    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -50,6 +57,10 @@ public class Collision : MonoBehaviour
                     Debug.Log("Colision with WATER");
                 }
                 firstCollision = true;
+                break;
+            case "points":
+                player.score = player.score + 10;
+                //col.gameObject.SetActive(false);
                 break;
             default:
                 Debug.Log("Colision with something");
