@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
-    public delegate void OnPlayerAction();
-    public OnPlayerAction OnPlayerDeath;
-    public GameObject water;
+    private enum LayerNames
+    {
+        Default = 0,
+        Log = 10,
+        maxLayers
+    }
 
-    private PlayerStatus player;
+    public delegate void OnPlayerAction();
+    public delegate void OnPlayerActionArgs(bool waterStatus, int layer);
+    public OnPlayerAction OnPlayerDeath;
+    public OnPlayerAction OnPlayerPassedObstacle;
+    public OnPlayerActionArgs OnPlayerTouchedLog;
+
     private string nextCollider;
     private bool firstCollision;
-
-
-    private void Start()
-    {
-        player = GetComponent<PlayerStatus>();
-    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (nextCollider == null)
         {
-            gameObject.layer = 0;
-            water.SetActive(true);
+            if (OnPlayerTouchedLog != null)
+            {
+                OnPlayerTouchedLog(true, (int)LayerNames.Default);
+            }
         }
 
         if (firstCollision)
@@ -34,8 +38,10 @@ public class Collision : MonoBehaviour
         switch (col.gameObject.tag)
         {
             case "log":
-                gameObject.layer = 10;
-                water.SetActive(false);
+                if (OnPlayerTouchedLog != null)
+                {
+                    OnPlayerTouchedLog(false, (int)LayerNames.Log);
+                }
                 firstCollision = true;
                 Debug.Log("Colision with LOG");
                 break;
@@ -48,7 +54,7 @@ public class Collision : MonoBehaviour
                 Debug.Log("Colision with CAR");
                 break;
             case "water":
-                if (gameObject.layer == 0)
+                if (gameObject.layer == (int)LayerNames.Default)
                 {
                     if (OnPlayerDeath != null)
                     {
@@ -59,21 +65,23 @@ public class Collision : MonoBehaviour
                 firstCollision = true;
                 break;
             case "points":
-                player.score = player.score + 10;
-                //col.gameObject.SetActive(false);
-                break;
-            default:
-                Debug.Log("Colision with something");
+                if (OnPlayerPassedObstacle != null)
+                {
+                    OnPlayerPassedObstacle();
+                }
+                Debug.Log("Colision with points");
                 break;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (gameObject.layer == 10 && nextCollider != "log")
+        if (gameObject.layer == (int)LayerNames.Log && nextCollider != "log")
         {
-            gameObject.layer = 0;
-            water.SetActive(true);
+            if (OnPlayerTouchedLog != null)
+            {
+                OnPlayerTouchedLog(true, (int)LayerNames.Default);
+            }
             firstCollision = false;
         }
         nextCollider = null;

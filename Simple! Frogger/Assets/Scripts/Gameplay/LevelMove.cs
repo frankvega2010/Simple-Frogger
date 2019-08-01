@@ -15,10 +15,10 @@ public class LevelMove : MonoBehaviour
     public float triggerDistance;
 
     private float finalDistance;
+    public float currentDistance;
     private bool canMove;
     private bool doOnce;
     private BoxCollider2D collider;
-    public float currentDistance;
 
     private void Start()
     {

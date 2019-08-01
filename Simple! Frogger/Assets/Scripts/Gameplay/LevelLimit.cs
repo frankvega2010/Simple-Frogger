@@ -17,6 +17,5 @@ public class LevelLimit : MonoBehaviour
                 OnPlayerTouch();
             }
         }
-        
     }
 }

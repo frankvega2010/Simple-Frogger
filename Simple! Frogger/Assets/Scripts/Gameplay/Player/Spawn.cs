@@ -10,11 +10,16 @@ public class Spawn : MonoBehaviour
     private void Start()
     {
         playerCollision = GetComponent<Collision>();
-        playerCollision.OnPlayerDeath = RespawnPlayer;
+        playerCollision.OnPlayerDeath += RespawnPlayer;
     }
 
     private void RespawnPlayer()
     {
         transform.position = new Vector3(0, -4.26f, 0);
+    }
+
+    private void OnDestroy()
+    {
+        playerCollision.OnPlayerDeath -= RespawnPlayer;
     }
 }

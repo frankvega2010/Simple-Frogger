@@ -19,10 +19,10 @@ public class ObstacleMovement : MonoBehaviour
         switch (choosenDirection)
         {
             case Directions.right:
-                transform.position = transform.position + new Vector3(speed, 0, 0) * Time.deltaTime;
+                transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
                 break;
             case Directions.left:
-                transform.position = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
+                transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;
                 break;
             default:
                 break;

@@ -267,6 +267,8 @@ MonoBehaviour:
   speed: 5
   canMove: 1
   levelMove: {fileID: 1736117248}
+  verticalScreenLimit: {x: 0.03, y: 1, z: 0}
+  horizontalScreenLimit: {x: 0.04, y: 0.96, z: 0}
 --- !u!212 &142267634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -374,7 +376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8841070c8d36d74da840e4b59b3a350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: {fileID: 468551021}
 --- !u!114 &142267638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 63.28, y: 0}
+  m_AnchoredPosition: {x: 63.279785, y: 0}
   m_SizeDelta: {x: 80, y: 65.98001}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &308452600
@@ -1232,6 +1233,7 @@ Transform:
   - {fileID: 519420032}
   - {fileID: 142267632}
   - {fileID: 1736117244}
+  - {fileID: 2018098184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2665,6 +2667,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2018098183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018098184}
+  - component: {fileID: 2018098185}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2018098184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018098183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 692615449}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018098185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018098183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93aa5e587c2e7740b01a0996d17b235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  water: {fileID: 468551021}
+  player: {fileID: 142267631}
 --- !u!1 &2034314500
 GameObject:
   m_ObjectHideFlags: 0

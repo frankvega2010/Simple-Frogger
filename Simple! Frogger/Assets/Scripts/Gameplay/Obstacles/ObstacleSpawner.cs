@@ -11,9 +11,9 @@ public class ObstacleSpawner : MonoBehaviour
 
     private GameObject newCar;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        limit.OnObstacleEnter += RemoveAndSpawn;
+        limit.OnObstacleEnter = RemoveAndSpawn;
         levelMove.OnLevelMove += RemoveOnly;
         newCar = Instantiate(obstacleBase);
         newCar.transform.SetParent(parent.transform);
@@ -35,12 +35,11 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void OnDestroy()
     {
-        limit.OnObstacleEnter -= RemoveAndSpawn;
+        levelMove.OnLevelMove -= RemoveOnly;
     }
 
     public void DeletePoints(GameObject pointsGameObject)
     {
-        Debug.Log("rip2");
         Transform child = obstacleBase.transform.GetChild(0);
         Destroy(child.gameObject);
         Destroy(pointsGameObject);
