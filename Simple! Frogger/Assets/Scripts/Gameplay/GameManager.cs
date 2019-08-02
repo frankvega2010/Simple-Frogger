@@ -26,8 +26,13 @@ public class GameManager : MonoBehaviour
 
     private void SwitchStatus(bool waterStatus, int layer)
     {
-        water.SetActive(waterStatus);
         player.layer = layer;
+        water.SetActive(waterStatus);
+        if (waterStatus)
+        {
+            water.SetActive(false);
+            water.SetActive(true);
+        }
     }
 
     private void SubtractLives()

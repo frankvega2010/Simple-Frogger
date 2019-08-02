@@ -17,8 +17,9 @@ public class Collision : MonoBehaviour
     public OnPlayerAction OnPlayerPassedObstacle;
     public OnPlayerActionArgs OnPlayerTouchedLog;
 
-    private string nextCollider;
-    private bool firstCollision;
+    public string lastCollider;
+    public string nextCollider;
+    public bool firstCollision;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -41,6 +42,16 @@ public class Collision : MonoBehaviour
                 if (OnPlayerTouchedLog != null)
                 {
                     OnPlayerTouchedLog(false, (int)LayerNames.Log);
+                }
+
+                if (lastCollider == null)
+                {
+                    lastCollider = col.gameObject.tag;
+                }
+                else
+                {
+                    nextCollider = col.gameObject.tag;
+                    Debug.Log(nextCollider);
                 }
                 firstCollision = true;
                 Debug.Log("Colision with LOG");
@@ -76,14 +87,21 @@ public class Collision : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (gameObject.layer == (int)LayerNames.Log && nextCollider != "log")
+        if (other.gameObject.tag == "log")
         {
-            if (OnPlayerTouchedLog != null)
+            if (gameObject.layer == (int)LayerNames.Log && nextCollider != "log")
             {
-                OnPlayerTouchedLog(true, (int)LayerNames.Default);
+                if (OnPlayerTouchedLog != null)
+                {
+                    OnPlayerTouchedLog(true, (int)LayerNames.Default);
+                }
+                firstCollision = false;
+
+                lastCollider = null;
+                nextCollider = null;
             }
-            firstCollision = false;
+            lastCollider = nextCollider;
+            nextCollider = null;
         }
-        nextCollider = null;
     }
 }

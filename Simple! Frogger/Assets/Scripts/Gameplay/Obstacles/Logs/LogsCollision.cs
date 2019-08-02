@@ -10,7 +10,7 @@ public class LogsCollision : MonoBehaviour
     private Transform target;
     private ObstacleMovement.Directions choosenDirection;
     private int speed;
-    private bool canMove;
+    public bool canMove;
 
     // Start is called before the first frame update
     private void Start()
@@ -50,6 +50,9 @@ public class LogsCollision : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        canMove = false;
+        if (other.gameObject.tag == "Player")
+        {
+            canMove = false;
+        }
     }
 }
