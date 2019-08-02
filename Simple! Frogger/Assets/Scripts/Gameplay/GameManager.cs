@@ -10,11 +10,11 @@ public class GameManager : MonoBehaviour
     private PlayerStatus playerStatus;
     private Collision playerCollision;
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         playerStatus = player.GetComponent<PlayerStatus>();
         playerCollision = player.GetComponent<Collision>();
-        playerCollision.OnPlayerPassedObstacle = GivePoints;
+        playerCollision.OnPlayerPassedObstacle += GivePoints;
         playerCollision.OnPlayerTouchedLog = SwitchStatus;
         playerCollision.OnPlayerDeath += SubtractLives;
     }
@@ -38,5 +38,6 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         playerCollision.OnPlayerDeath -= SubtractLives;
+        playerCollision.OnPlayerPassedObstacle -= GivePoints;
     }
 }
