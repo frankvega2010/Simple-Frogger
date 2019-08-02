@@ -3627,11 +3627,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676637126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a771af3b11f32dd40ac5e30d751bbb7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 53f788e63edecf74db95b55d042de382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  isSecondaryPauseButton: 1
+  sceneName: 
 --- !u!114 &1676637129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3673,7 +3672,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1676637128}
-        m_MethodName: ContinueGame
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

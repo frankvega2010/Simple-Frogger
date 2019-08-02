@@ -10,7 +10,7 @@ public class LogsCollision : MonoBehaviour
     private Transform target;
     private ObstacleMovement.Directions choosenDirection;
     private int speed;
-    public bool canMove;
+    private bool canMove;
 
     // Start is called before the first frame update
     private void Start()
