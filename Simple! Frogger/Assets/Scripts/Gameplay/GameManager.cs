@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public List<LogsCollision> woodLogs;
+    public Text timeText;
     public GameObject water;
     public GameObject player;
     public UILevelFinish finishUI;
     public float endLevelWaitingTime;
 
+    private GameObject savedStatusGO;
+    private PlayerStatusSave savedStatus;
     private PlayerStatus playerStatus;
     private Collision playerCollision;
     private float timer;
@@ -29,6 +33,9 @@ public class GameManager : MonoBehaviour
         ObstacleSpawner.OnSpawnerAddLog += AddLog;
         ObstacleSpawner.OnSpawnerRemoveLog += RemoveLog;
         LevelLimit.OnPlayerEndLevel = EndLevel;
+
+        savedStatusGO = GameObject.Find("SavedStatus");
+        savedStatus = savedStatusGO.GetComponent<PlayerStatusSave>();
     }
 
     private void Update()
@@ -108,15 +115,20 @@ public class GameManager : MonoBehaviour
         if (playerStatus.lives > 0)
         {
             finishUI.showUI("You Won!", Color.green);
+            savedStatus.isPlayerAlive = true;
         }
         else
         {
             finishUI.showUI("You Lost!", Color.red);
+            savedStatus.isPlayerAlive = false;
         }
+
+        savedStatus.score = playerStatus.score;
+        savedStatus.time = timeText.text;
     }
 
     private void GoToGameOverScene()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("GameOver");
     }
 }

@@ -7420,11 +7420,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1114173033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a771af3b11f32dd40ac5e30d751bbb7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 53f788e63edecf74db95b55d042de382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  isSecondaryPauseButton: 1
+  sceneName: Menu
 --- !u!114 &1114173036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7466,7 +7465,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114173035}
-        m_MethodName: ContinueGame
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9906,6 +9905,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550692210}
   m_CullTransparentMesh: 0
+--- !u!1 &1613522313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613522315}
+  - component: {fileID: 1613522314}
+  m_Layer: 0
+  m_Name: SavedStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1613522314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613522313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982cd163506589a419ef261c72a2e54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 3000
+  level: 1
+  time: 00:12:32
+  isPlayerAlive: 0
+--- !u!4 &1613522315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613522313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 473.29816, y: 639.674, z: -6.952668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1620833444
 GameObject:
   m_ObjectHideFlags: 0
@@ -13706,6 +13752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   woodLogs: []
+  timeText: {fileID: 1550692212}
   water: {fileID: 468551021}
   player: {fileID: 142267631}
   finishUI: {fileID: 1815724885}
