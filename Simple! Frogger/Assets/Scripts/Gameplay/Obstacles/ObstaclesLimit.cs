@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class ObstaclesLimit : MonoBehaviour
 {
-    public delegate void OnObstacleAction(GameObject obstacle);
-
-    public OnObstacleAction OnObstacleEnter;
+    public ObstacleSpawner obstacleSpawner;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         switch (col.gameObject.tag)
         {
             case "car":
-                if (OnObstacleEnter != null)
+                if (obstacleSpawner.newObstacle == col.gameObject)
                 {
-                    OnObstacleEnter(col.gameObject);
+                    obstacleSpawner.RemoveAndSpawn();
+                }
+                break;
+            case "log":
+                if (obstacleSpawner.newObstacle == col.gameObject)
+                {
+                    obstacleSpawner.RemoveAndSpawn();
                 }
                 break;
             default:

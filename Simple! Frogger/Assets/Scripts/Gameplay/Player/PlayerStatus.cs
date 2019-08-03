@@ -7,4 +7,5 @@ public class PlayerStatus : MonoBehaviour
     public int lives;
     public int score;
     public int level;
+    public GameObject velocityOrigin;
 }

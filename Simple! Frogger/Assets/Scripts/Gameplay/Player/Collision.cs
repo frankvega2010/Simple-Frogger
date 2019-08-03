@@ -12,68 +12,35 @@ public class Collision : MonoBehaviour
     }
 
     public delegate void OnPlayerAction();
-    public delegate void OnPlayerActionArgs(bool waterStatus, int layer);
+    public delegate void OnPlayerActionArgs(bool waterStatus);
     public OnPlayerAction OnPlayerDeath;
     public OnPlayerAction OnPlayerPassedObstacle;
+    public OnPlayerAction OnPlayerExitCollision;
     public OnPlayerActionArgs OnPlayerTouchedLog;
-
-    public string lastCollider;
-    public string nextCollider;
-    public bool firstCollision;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (nextCollider == null)
-        {
-            if (OnPlayerTouchedLog != null)
-            {
-                OnPlayerTouchedLog(true, (int)LayerNames.Default);
-            }
-        }
-
-        if (firstCollision)
-        {
-            nextCollider = col.gameObject.tag;
-        }
-
         switch (col.gameObject.tag)
         {
             case "log":
                 if (OnPlayerTouchedLog != null)
                 {
-                    OnPlayerTouchedLog(false, (int)LayerNames.Log);
+                    OnPlayerTouchedLog(false);
                 }
-
-                if (lastCollider == null)
-                {
-                    lastCollider = col.gameObject.tag;
-                }
-                else
-                {
-                    nextCollider = col.gameObject.tag;
-                    Debug.Log(nextCollider);
-                }
-                firstCollision = true;
-                Debug.Log("Colision with LOG");
                 break;
             case "car":
                 if (OnPlayerDeath != null)
                 {
                     OnPlayerDeath();
                 }
-                firstCollision = true;
                 Debug.Log("Colision with CAR");
                 break;
             case "water":
-                if (gameObject.layer == (int)LayerNames.Default)
-                {
                     if (OnPlayerDeath != null)
                     {
                         OnPlayerDeath();
                     }
                     Debug.Log("Colision with WATER");
-                }
-                firstCollision = true;
                 break;
             case "points":
                 if (OnPlayerPassedObstacle != null)
@@ -89,19 +56,10 @@ public class Collision : MonoBehaviour
     {
         if (other.gameObject.tag == "log")
         {
-            if (gameObject.layer == (int)LayerNames.Log && nextCollider != "log")
+            if (OnPlayerExitCollision != null)
             {
-                if (OnPlayerTouchedLog != null)
-                {
-                    OnPlayerTouchedLog(true, (int)LayerNames.Default);
-                }
-                firstCollision = false;
-
-                lastCollider = null;
-                nextCollider = null;
+                OnPlayerExitCollision();
             }
-            lastCollider = nextCollider;
-            nextCollider = null;
         }
     }
 }

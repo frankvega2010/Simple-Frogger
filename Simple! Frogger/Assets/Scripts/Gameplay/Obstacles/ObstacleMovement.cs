@@ -10,7 +10,7 @@ public class ObstacleMovement : MonoBehaviour
         maxDirs
     }
 
-    public int speed;
+    public float speed;
     public Directions choosenDirection;
 
     // Update is called once per frame

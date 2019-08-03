@@ -15,7 +15,7 @@ public class Spawn : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        transform.position = new Vector3(0, -4.26f, 0);
+        transform.position = new Vector3(0, -4.26f, -1.06f);
     }
 
     private void OnDestroy()

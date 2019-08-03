@@ -7,15 +7,29 @@ public class LevelLimit : MonoBehaviour
     public delegate void OnPlayerAction();
 
     public OnPlayerAction OnPlayerTouch;
+    public OnPlayerAction OnPlayerEndLevel;
+    private bool hasPlayerFinishedLevel;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
         {
-            if (OnPlayerTouch != null)
+            if (!hasPlayerFinishedLevel)
             {
-                OnPlayerTouch();
+                if (OnPlayerTouch != null)
+                {
+                    OnPlayerTouch();
+                }
+                hasPlayerFinishedLevel = true;
             }
+            else
+            {
+                if (OnPlayerEndLevel != null)
+                {
+                    OnPlayerEndLevel();
+                }
+            }
+            
         }
     }
 }

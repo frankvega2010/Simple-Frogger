@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public List<LogsCollision> woodLogs;
     public GameObject water;
     public GameObject player;
 
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
         playerCollision.OnPlayerPassedObstacle += GivePoints;
         playerCollision.OnPlayerTouchedLog = SwitchStatus;
         playerCollision.OnPlayerDeath += SubtractLives;
+        playerCollision.OnPlayerExitCollision = CheckLogsCollision;
+        ObstacleSpawner.OnSpawnerAddLog += AddLog;
+        ObstacleSpawner.OnSpawnerRemoveLog += RemoveLog;
     }
 
     private void GivePoints()
@@ -24,15 +28,9 @@ public class GameManager : MonoBehaviour
         playerStatus.score += 10;
     }
 
-    private void SwitchStatus(bool waterStatus, int layer)
+    private void SwitchStatus(bool waterStatus)
     {
-        player.layer = layer;
         water.SetActive(waterStatus);
-        if (waterStatus)
-        {
-            water.SetActive(false);
-            water.SetActive(true);
-        }
     }
 
     private void SubtractLives()
@@ -44,5 +42,39 @@ public class GameManager : MonoBehaviour
     {
         playerCollision.OnPlayerDeath -= SubtractLives;
         playerCollision.OnPlayerPassedObstacle -= GivePoints;
+        ObstacleSpawner.OnSpawnerAddLog -= AddLog;
+        ObstacleSpawner.OnSpawnerRemoveLog -= RemoveLog;
+    }
+
+    private void AddLog(LogsCollision log)
+    {
+        woodLogs.Add(log);
+    }
+
+    private void RemoveLog(LogsCollision log)
+    {
+        woodLogs.Remove(log);
+    }
+
+    private void CheckLogsCollision()
+    {
+        int amountFound = 0;
+
+        for (int i = 0; i < woodLogs.Count; i++)
+        {
+            if (woodLogs[i].isPlayerOnIt)
+            {
+                amountFound++;
+            }
+        }
+
+        if (amountFound > 0)
+        {
+            SwitchStatus(false);
+        }
+        else
+        {
+            SwitchStatus(true);
+        }
     }
 }

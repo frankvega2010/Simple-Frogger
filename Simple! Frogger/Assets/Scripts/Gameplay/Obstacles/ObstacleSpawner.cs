@@ -4,38 +4,69 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
+    public delegate void OnSpawnerAction(LogsCollision log);
+
+    public static OnSpawnerAction OnSpawnerAddLog;
+    public static OnSpawnerAction OnSpawnerRemoveLog;
+
     public GameObject parent;
     public GameObject obstacleBase;
     public ObstaclesLimit limit;
     public LevelMove levelMove;
+    public float minSpeed;
+    public float maxSpeed;
 
-    private GameObject newCar;
+    public GameObject newObstacle;
+    public float randomSpeed;
+    private LogsCollision savedLogsCollision;
+
     // Start is called before the first frame update
     private void Start()
     {
-        limit.OnObstacleEnter = RemoveAndSpawn;
         levelMove.OnLevelMove += RemoveOnly;
-        newCar = Instantiate(obstacleBase);
-        newCar.transform.SetParent(parent.transform);
-        newCar.SetActive(true);
-    }
-
-    private void RemoveAndSpawn(GameObject obstacle)
-    {
-        Destroy(obstacle);
-        newCar = Instantiate(obstacleBase);
-        newCar.transform.SetParent(parent.transform);
-        newCar.SetActive(true);
+        levelMove.OnLevelFinishedMoving += Spawn;
+        Spawn();
     }
 
     private void RemoveOnly()
     {
-        Destroy(newCar);
+        if (gameObject.tag == "log")
+        {
+            if (OnSpawnerRemoveLog != null)
+            {
+                OnSpawnerRemoveLog(savedLogsCollision);
+            }
+        }
+        Destroy(newObstacle);
     }
 
     private void OnDestroy()
     {
         levelMove.OnLevelMove -= RemoveOnly;
+        levelMove.OnLevelFinishedMoving -= Spawn;
+    }
+
+    public void RemoveAndSpawn()
+    {
+        RemoveOnly();
+        Spawn();
+    }
+
+    private void Spawn()
+    {
+        newObstacle = Instantiate(obstacleBase);
+        newObstacle.transform.SetParent(parent.transform, false);
+        randomSpeed = Random.Range(minSpeed, maxSpeed);
+        newObstacle.GetComponent<ObstacleMovement>().speed = randomSpeed;
+        newObstacle.SetActive(true);
+        if (gameObject.tag == "log")
+        {
+            if (OnSpawnerAddLog != null)
+            {
+                OnSpawnerAddLog(newObstacle.GetComponent<LogsCollision>());
+                savedLogsCollision = newObstacle.GetComponent<LogsCollision>();
+            }
+        }
     }
 
     public void DeletePoints(GameObject pointsGameObject)

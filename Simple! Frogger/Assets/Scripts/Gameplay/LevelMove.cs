@@ -5,6 +5,7 @@ public class LevelMove : MonoBehaviour
     public delegate void OnLevelAction();
 
     public OnLevelAction OnLevelMove;
+    public OnLevelAction OnLevelFinishedMoving;
 
     public Transform player;
     public LevelLimit levelLimit;
@@ -50,6 +51,11 @@ public class LevelMove : MonoBehaviour
                 if (OnLevelMove != null)
                 {
                     OnLevelMove();
+                }
+
+                if (OnLevelFinishedMoving != null)
+                {
+                    OnLevelFinishedMoving();
                 }
 
                 collider.offset = collider.offset + new Vector2(0,triggerDistance);
