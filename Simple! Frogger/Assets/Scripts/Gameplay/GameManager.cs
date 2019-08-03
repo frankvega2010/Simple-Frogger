@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public List<LogsCollision> woodLogs;
     public GameObject water;
     public GameObject player;
+    public UILevelFinish finishUI;
+    public float endLevelWaitingTime;
 
     private PlayerStatus playerStatus;
     private Collision playerCollision;
+    private float timer;
+    private bool hasLevelEnded;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -21,6 +28,19 @@ public class GameManager : MonoBehaviour
         playerCollision.OnPlayerExitCollision = CheckLogsCollision;
         ObstacleSpawner.OnSpawnerAddLog += AddLog;
         ObstacleSpawner.OnSpawnerRemoveLog += RemoveLog;
+        LevelLimit.OnPlayerEndLevel = EndLevel;
+    }
+
+    private void Update()
+    {
+        if (hasLevelEnded)
+        {
+            timer += Time.deltaTime;
+            if (timer >= endLevelWaitingTime)
+            {
+                GoToGameOverScene();
+            }
+        }
     }
 
     private void GivePoints()
@@ -36,6 +56,10 @@ public class GameManager : MonoBehaviour
     private void SubtractLives()
     {
         playerStatus.lives--;
+        if (playerStatus.lives <= 0)
+        {
+            EndLevel();
+        }
     }
 
     private void OnDestroy()
@@ -76,5 +100,23 @@ public class GameManager : MonoBehaviour
         {
             SwitchStatus(true);
         }
+    }
+
+    private void EndLevel()
+    {
+        hasLevelEnded = true;
+        if (playerStatus.lives > 0)
+        {
+            finishUI.showUI("You Won!", Color.green);
+        }
+        else
+        {
+            finishUI.showUI("You Lost!", Color.red);
+        }
+    }
+
+    private void GoToGameOverScene()
+    {
+        SceneManager.LoadScene("Gameplay");
     }
 }

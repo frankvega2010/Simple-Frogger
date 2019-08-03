@@ -15,6 +15,7 @@ public class ObstacleSpawner : MonoBehaviour
     public LevelMove levelMove;
     public float minSpeed;
     public float maxSpeed;
+    public bool isSecondRow;
 
     public GameObject newObstacle;
     public float randomSpeed;
@@ -71,8 +72,11 @@ public class ObstacleSpawner : MonoBehaviour
 
     public void DeletePoints(GameObject pointsGameObject)
     {
-        Transform child = obstacleBase.transform.GetChild(0);
-        Destroy(child.gameObject);
-        Destroy(pointsGameObject);
+        if (!isSecondRow)
+        {
+            Transform child = obstacleBase.transform.GetChild(0);
+            Destroy(child.gameObject);
+            Destroy(pointsGameObject);
+        }
     }
 }

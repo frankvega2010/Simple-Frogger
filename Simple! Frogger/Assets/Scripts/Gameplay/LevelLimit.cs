@@ -7,7 +7,7 @@ public class LevelLimit : MonoBehaviour
     public delegate void OnPlayerAction();
 
     public OnPlayerAction OnPlayerTouch;
-    public OnPlayerAction OnPlayerEndLevel;
+    public static OnPlayerAction OnPlayerEndLevel;
     private bool hasPlayerFinishedLevel;
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -28,6 +28,8 @@ public class LevelLimit : MonoBehaviour
                 {
                     OnPlayerEndLevel();
                 }
+
+                Debug.Log("You won!");
             }
             
         }
