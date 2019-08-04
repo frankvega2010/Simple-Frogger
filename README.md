@@ -14,7 +14,6 @@ Be sure to download the game here!
 
 Github Link:
 
-Itch.io:
 
 ## Full Credits:
 
