@@ -118,7 +118,6 @@ public class Movement : MonoBehaviour
         {
             if (!switchLastAnimationOnce)
             {
-                Debug.Log("messi");
                 SetAllAnimationsOnFalse();
                 switch (lastDirection)
                 {
