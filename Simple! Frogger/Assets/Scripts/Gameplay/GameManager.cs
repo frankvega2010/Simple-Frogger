@@ -129,10 +129,23 @@ public class GameManager : MonoBehaviour
         playerMovement.enabled = false;
         savedStatus.score = playerStatus.score;
         savedStatus.time = timeText.text;
+        UpdateHighscore();
+        
     }
 
     private void GoToGameOverScene()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    private void UpdateHighscore()
+    {
+        int oldHighscore = PlayerPrefs.GetInt("highscore", 0);
+        int newHighscore = savedStatus.score;
+
+        if (newHighscore >= oldHighscore)
+        {
+            PlayerPrefs.SetInt("highscore", newHighscore);
+        }
     }
 }

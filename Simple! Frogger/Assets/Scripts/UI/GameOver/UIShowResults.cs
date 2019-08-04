@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class UIShowResults : MonoBehaviour
 {
     public Text scoreText;
+    public Text highscoreText;
     public Text timeText;
     public Text levelButtonText;
 
+    public bool onlyHighscore;
     public string time;
     public int score;
 
@@ -18,19 +20,24 @@ public class UIShowResults : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        savedStatusGO = GameObject.Find("SavedStatus");
-        savedStatus = savedStatusGO.GetComponent<PlayerStatusSave>();
+        highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore", 0);
 
-        scoreText.text = "Score: " + savedStatus.score;
-        timeText.text = savedStatus.time;
+        if (!onlyHighscore)
+        {
+            savedStatusGO = GameObject.Find("SavedStatus");
+            savedStatus = savedStatusGO.GetComponent<PlayerStatusSave>();
 
-        if (savedStatus.isPlayerAlive)
-        {
-            levelButtonText.text = "Next Level!";
-        }
-        else
-        {
-            levelButtonText.text = "Try Again?";
+            scoreText.text = "Score: " + savedStatus.score;
+            timeText.text = savedStatus.time;
+
+            if (savedStatus.isPlayerAlive)
+            {
+                levelButtonText.text = "Next Level!";
+            }
+            else
+            {
+                levelButtonText.text = "Try Again?";
+            }
         }
     }
 }
