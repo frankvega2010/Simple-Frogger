@@ -12,7 +12,7 @@ As for now, the features will be the following:
 
 Be sure to download the game here!
 
-Github Link:
+Github Link: https://github.com/frankvega2010/Simple-Frogger/releases/tag/v1.0
 
 
 ## Full Credits:
