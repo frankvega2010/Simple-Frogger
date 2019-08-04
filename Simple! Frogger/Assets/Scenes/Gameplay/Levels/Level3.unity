@@ -1891,7 +1891,7 @@ RectTransform:
   - {fileID: 1676637127}
   - {fileID: 1114173034}
   m_Father: {fileID: 595155975}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3303,7 +3303,7 @@ RectTransform:
   m_Children:
   - {fileID: 1148766759}
   m_Father: {fileID: 595155975}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -3337,7 +3337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a771af3b11f32dd40ac5e30d751bbb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 255152235}
   isSecondaryPauseButton: 0
 --- !u!114 &520753818
 MonoBehaviour:
@@ -3949,8 +3949,8 @@ RectTransform:
   - {fileID: 1669115819}
   - {fileID: 608977511}
   - {fileID: 725059294}
-  - {fileID: 520753815}
   - {fileID: 255152236}
+  - {fileID: 520753815}
   - {fileID: 1815724884}
   m_Father: {fileID: 585219015}
   m_RootOrder: 0
@@ -9624,8 +9624,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: PauseGame
+      - m_Target: {fileID: 1410949591}
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
