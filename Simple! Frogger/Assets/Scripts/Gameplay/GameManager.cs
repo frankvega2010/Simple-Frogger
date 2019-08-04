@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private GameObject savedStatusGO;
     private PlayerStatusSave savedStatus;
     private PlayerStatus playerStatus;
+    private Movement playerMovement;
     private Collision playerCollision;
     private float timer;
     private bool hasLevelEnded;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         playerStatus = player.GetComponent<PlayerStatus>();
         playerCollision = player.GetComponent<Collision>();
+        playerMovement = player.GetComponent<Movement>();
         playerCollision.OnPlayerPassedObstacle += GivePoints;
         playerCollision.OnPlayerTouchedLog = SwitchStatus;
         playerCollision.OnPlayerDeath += SubtractLives;
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         playerStatus.lives--;
         if (playerStatus.lives <= 0)
         {
+            playerStatus.lives = 0;
             EndLevel();
         }
     }
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
             savedStatus.isPlayerAlive = false;
         }
 
+        playerMovement.enabled = false;
         savedStatus.score = playerStatus.score;
         savedStatus.time = timeText.text;
     }
