@@ -8,7 +8,7 @@ As for now, the features will be the following:
 - 3 Levels
 - Animations
 - Loading Screens
-- Different Obstacles
+- Highscores
 
 Be sure to download the game here!
 
