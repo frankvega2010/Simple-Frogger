@@ -1,6 +1,6 @@
 # Simple! Frogger
 ## A Unity game inspired by a classic!
-## Current State: WIP
+## Current State: v1.0
 
 The Simple! series makes an unexpected return, using the Unity Engine, the game will be able to have even more features!
 As for now, the features will be the following:
