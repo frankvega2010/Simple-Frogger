@@ -20,11 +20,14 @@ public class UILevelButton : MonoBehaviour
     {
         if (savedStatus.isPlayerAlive)
         {
-            SceneManager.LoadScene("Level" + (savedStatus.level+1));
+            CurrentSessionStats.Get().level += 1;
+            LoaderManager.Get().LoadScene("Level" + (savedStatus.level + 1));
+            UILoadingScreen.Get().SetVisible(true);
         }
         else
         {
-            SceneManager.LoadScene("Level" + savedStatus.level);
+            LoaderManager.Get().LoadScene("Level" + savedStatus.level);
+            UILoadingScreen.Get().SetVisible(true);
         }
     }
 }
