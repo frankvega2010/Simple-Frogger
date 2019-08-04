@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
         ObstacleSpawner.OnSpawnerRemoveLog += RemoveLog;
         LevelLimit.OnPlayerEndLevel = EndLevel;
 
-        savedStatusGO = GameObject.Find("SavedStatus");
-        savedStatus = savedStatusGO.GetComponent<PlayerStatusSave>();
+        savedStatus = PlayerStatusSave.Get();
+        savedStatus.level = playerStatus.level;
     }
 
     private void Update()

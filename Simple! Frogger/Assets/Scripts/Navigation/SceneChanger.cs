@@ -23,7 +23,7 @@ public class SceneChanger : MonoBehaviour
         {
             if (assignLevelNumber)
             {
-                CurrentSessionStats.Get().level = levelNumber;
+                PlayerStatusSave.Get().level = levelNumber;
             }
 
             LoaderManager.Get().LoadScene(sceneName);

@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
         maxDirs
     }
 
-
     public Animator animator;
     public int speed;
     public bool canMove;
@@ -25,9 +24,10 @@ public class Movement : MonoBehaviour
     public Vector3 verticalScreenLimit;
     public Vector3 horizontalScreenLimit;
 
-    public bool changeAnimationsOnceX;
-    public bool changeAnimationsOnceY;
-    public idleDirections lastDirection;
+    private bool changeAnimationsOnceX;
+    private bool changeAnimationsOnceY;
+    private bool switchLastAnimationOnce;
+    private idleDirections lastDirection;
 
     private void Start()
     {
@@ -59,9 +59,9 @@ public class Movement : MonoBehaviour
                 lastDirection = idleDirections.right;
                 SetAllAnimationsOnFalse();
                 changeAnimationsOnceX = true;
+                animator.SetBool("right", true);
+                switchLastAnimationOnce = false;
             }
-            
-            animator.SetBool("right", true);
         }
         else if (XAxis < 0 && YAxis == 0)
         {
@@ -72,9 +72,9 @@ public class Movement : MonoBehaviour
                 lastDirection = idleDirections.left;
                 SetAllAnimationsOnFalse();
                 changeAnimationsOnceX = true;
+                animator.SetBool("left", true);
+                switchLastAnimationOnce = false;
             }
-
-            animator.SetBool("left", true);
         }
 
         if (YAxis > 0 && XAxis == 0)
@@ -86,9 +86,9 @@ public class Movement : MonoBehaviour
                 lastDirection = idleDirections.front;
                 SetAllAnimationsOnFalse();
                 changeAnimationsOnceY = true;
+                animator.SetBool("front", true);
+                switchLastAnimationOnce = false;
             }
-
-            animator.SetBool("front", true);
         }
         else if (YAxis < 0 && XAxis == 0)
         {
@@ -99,15 +99,14 @@ public class Movement : MonoBehaviour
                 lastDirection = idleDirections.back;
                 SetAllAnimationsOnFalse();
                 changeAnimationsOnceY = true;
+                animator.SetBool("back", true);
+                switchLastAnimationOnce = false;
             }
-
-            animator.SetBool("back", true);
         }
 
         if (XAxis == 0)
         {
             changeAnimationsOnceX = false;
-            
         }
 
         if (YAxis == 0)
@@ -117,21 +116,26 @@ public class Movement : MonoBehaviour
 
         if (YAxis == 0 && XAxis == 0)
         {
-            SetAllAnimationsOnFalse();
-            switch (lastDirection)
+            if (!switchLastAnimationOnce)
             {
-                case idleDirections.back:
-                    animator.SetBool("stopBack", true);
-                    break;
-                case idleDirections.front:
-                    animator.SetBool("stopFront", true);
-                    break;
-                case idleDirections.left:
-                    animator.SetBool("stopLeft", true);
-                    break;
-                case idleDirections.right:
-                    animator.SetBool("stopRight", true);
-                    break;
+                Debug.Log("messi");
+                SetAllAnimationsOnFalse();
+                switch (lastDirection)
+                {
+                    case idleDirections.back:
+                        animator.SetBool("stopBack", true);
+                        break;
+                    case idleDirections.front:
+                        animator.SetBool("stopFront", true);
+                        break;
+                    case idleDirections.left:
+                        animator.SetBool("stopLeft", true);
+                        break;
+                    case idleDirections.right:
+                        animator.SetBool("stopRight", true);
+                        break;
+                }
+                switchLastAnimationOnce = true;
             }
         }
     }
