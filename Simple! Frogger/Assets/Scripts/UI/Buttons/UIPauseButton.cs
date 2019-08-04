@@ -11,6 +11,7 @@ public class UIPauseButton : MonoBehaviour
     private bool isGamePaused;
     private GameObject myEventSystem;
     private GameObject primaryPauseButton;
+    private ColorBlock originalColors;
     private void Start()
     {
         if (isSecondaryPauseButton)
@@ -46,14 +47,17 @@ public class UIPauseButton : MonoBehaviour
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
-                GetComponent<Image>().color = Color.red;
+                ColorBlock colors = GetComponent<Button>().colors;
+                originalColors = colors;
+                colors.normalColor = Color.red;
+                GetComponent<Button>().colors = colors;
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
             }
             else
             {
                 Time.timeScale = 1;
                 pauseMenu.SetActive(false);
-                GetComponent<Image>().color = Color.white;
+                GetComponent<Button>().colors = originalColors;
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
             }
         }
