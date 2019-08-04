@@ -16,4 +16,31 @@ Github Link:
 
 Itch.io:
 
+## Full Credits:
+
+### Font made by Poppy Works:
+
+https://poppyworks.itch.io/silver
+
+### Car Sprites made by hc:
+
+https://opengameart.org/content/vary-car-pack-1
+
+### River Tilemap made by lfcarvente:
+
+https://lfcarvente.itch.io/map-tiles
+
+### Streets Tilemap made by hc:
+
+https://opengameart.org/content/road-tile-textures
+
+### Frog Sprite made by whtdragon:
+
+https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
+
+## Unity Assets Used:
+
+### Unity UI Extensions
+
+
 Enjoy!
